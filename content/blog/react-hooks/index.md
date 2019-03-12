@@ -148,6 +148,73 @@ function ExampleWithManyStates() {
 
 數組解構語法(array destructuring syntax)允許我們為通過調用 useState 的狀態變量賦予不同的名稱。 這些名稱不是 useState API 的一部分。 相反，React假定如果多次調用useState，則在每次渲染期間以相同的順序執行。 之後你就會想為什麼這種方法有效，以及何時有用。
 
+但是什麼是 hooks？
+
+hooks是讓您從功能組件“hook into”React狀態和生命週期功能的功能。 hook 在 class內部不起作用 - 它們允許你在沒有 class 的情況下使用 React。
+
+React提供了一些像useState這樣的內置Hook。 您還可以創建自己的Hook以重用不同組件之間的狀態行為。 我們先來看看內置的Hooks。
+
+## Effect Hook
+
+您之前可能已經從React組件執行 data fetching, subscriptions 或 manually (手動)更改DOM。 我們將這些操作稱為“side effects”（或簡稱為“effects”），因為它們會影響其他組件(components)，並且在渲染過程中無法完成。
+
+Effect Hook，useEffect增加了從功能組件(function component)執行  side effects的功能。 它與React classes 中的componentDidMount，componentDidUpdate和componentWillUnmount具有相同的用途，但統一為單個API。
+
+```js
+import React, { useState, useEffect } from 'react';
+
+function Example() {
+  const [count, setCount222] = useState('');
+
+  // Similar to componentDidMount and componentDidUpdate:
+  useEffect(() => {
+    // Update the document title using the browser API
+    document.title = `You clicked ${count} times`;
+  });
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount222(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+export default Example
+```
+
+![](./reacthookEffectstate.png)
+
+當你調用 useEffect 時，你告訴React在刷新對DOM的更改後運行你的“effect” function。 effects在 components 內聲明，因此可以訪問其props和state。 默認情況下，React在每次 render 後運行效果 - 包括第一次render 。 
+
+effects 還可以選擇通過 returning a function 來指定如何“clean up”它們。 例如，此組件使用 effect 來訂閱朋友的在線狀態，並通過取消訂閱來清理：
+
+```js
+import React, { useState, useEffect } from 'react';
+
+function FriendStatus(props) {
+  const [isOnline, setIsOnline] = useState(null);
+
+  function handleStatusChange(status) {
+    setIsOnline(status.isOnline);
+  }
+
+  useEffect(() => {
+    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+
+    return () => {
+      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
+    };
+  });
+
+  if (isOnline === null) {
+    return 'Loading...';
+  }
+  return isOnline ? 'Online' : 'Offline';
+}
+```
+
 ---
 參考文章:
 
