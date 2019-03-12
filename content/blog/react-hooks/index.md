@@ -123,6 +123,30 @@ function Example() {
   );
 }
 ```
+![](./reactHookState.png)
+
+Here, useState is a Hook (we’ll talk about what this means in a moment 稍後). We call it inside a function component to add some local state to it. React will preserve(保留
+) this state between re-renders(重新渲染). useState returns a pair(一對): the current state value(當前狀態值) and a function that lets you update it. You can call this function from an event handler or somewhere else.( 您可以從事件處理程序或其他地方使用這個功能。) It’s similar to this.setState in a class, except it doesn’t merge the old and new state together. (只是它不合併新老狀態。)
+
+useState的唯一參數是初始狀態。 在上面的例子中，它是0，因為我們的計數器從零開始。 請注意，與this.state不同，此處的狀態不必是 object - 儘可以是您想要。 初始狀態參數(initial state argument)僅在第一次渲染期間使用。
+
+---
+
+聲明多個 state變量
+
+您可以在單個組件(component) 中多次使用State Hook：
+
+```js
+function ExampleWithManyStates() {
+  // Declare multiple state variables!
+  const [age, setAge] = useState(42);
+  const [fruit, setFruit] = useState('banana');
+  const [todos, setTodos] = useState([{ text: 'Learn Hooks' }]);
+  // ...
+}
+```
+
+數組解構語法(array destructuring syntax)允許我們為通過調用 useState 的狀態變量賦予不同的名稱。 這些名稱不是 useState API 的一部分。 相反，React假定如果多次調用useState，則在每次渲染期間以相同的順序執行。 之後你就會想為什麼這種方法有效，以及何時有用。
 
 ---
 參考文章:
