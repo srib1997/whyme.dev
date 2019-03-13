@@ -244,14 +244,23 @@ It’s only after I stopped looking at the useEffect Hook through the prism of t
 
 ---
 
-This article assumes that you’re somewhat familiar with useEffect API.
+This article assumes(假設) that you’re somewhat(幾分) familiar(熟悉) with useEffect API.
 
 It’s also really long. It’s like a mini-book. That’s just my preferred format. But I wrote a TLDR just below if you’re in a rush or don’t really care.
 
-If you’re not comfortable with deep dives, you might want to wait until these explanations appear elsewhere. Just like when React came out in 2013, it will take some time for people to recognize a different mental model and teach it.
+If you’re not comfortable(不舒服) with deep dives, you might want to wait until(直到) these explanations(解釋) appear(出現) elsewhere. Just like when React came out in 2013, it will take some time for people to recognize(認識) a different mental(心理) model and teach it.
 
 ---
 
+## TLDR
+
+Here’s a quick TLDR if you don’t want to read the whole thing. If some parts don’t make sense, you can scroll down until you find something related(有關).
+
+Feel free to skip it if you plan to read the whole post. I’ll link to it at the end.
+
+Question: How do I replicate(複製) componentDidMount with useEffect?
+
+While you can useEffect(fn, []), it’s not an exact equivalent(相等). Unlike componentDidMount, it will capture(捕獲) props and state. So even(即使) inside the callbacks, you’ll see the initial(最初) props and state. If you want to see “latest” something, you can write it to a ref. But there’s usually a simpler way to structure(構建) the code so that you don’t have to. Keep in mind that the mental model for effects is different from componentDidMount and other lifecycles, and trying to find their exact equivalents may confuse you more than help. To get productive(效率), you need to “think in effects”, and their mental model is closer to implementing synchronization(實現同步) than to responding to lifecycle events.
 
 ---
 參考文章:
