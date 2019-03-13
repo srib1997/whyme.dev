@@ -215,6 +215,44 @@ function FriendStatus(props) {
 }
 ```
 
+# Dan
+
+You wrote a few components with [Hooks](https://reactjs.org/docs/hooks-intro.html)(你用Hooks編寫了一些組件). Maybe even a small app(或者是一個小應用). You’re mostly satisfied（滿意）. You’re comfortable（合適的） with the API and picked up（獲得了） a few tricks(技巧) along the way. You even made some [custom Hooks](https://reactjs.org/docs/hooks-custom.html) to extract(提取) repetitive(重複) logic (300 lines gone!) and showed it off(展示) to your colleagues(同事). “Great job”, they said.
+
+But sometimes when you useEffect, the pieces don’t quite fit together(碎片並不完全合適). You have a nagging(嘮叨的) feeling that you’re missing something. It seems similar to class lifecycles… but is it really? You find yourself asking questions like(你發現自己會問這樣的問題):
+
+
+🤔 How do I replicate(複製) componentDidMount with useEffect?
+
+🤔 How do I correctly fetch data(正確獲取數據) inside useEffect? What is []?
+
+🤔 Do I need to specify(提起) functions as effect dependencies(依賴) or not?
+
+🤔 Why do I sometimes get an infinite(無限) refetching loop?
+
+🤔 Why do I sometimes get an old state (舊的狀態)or prop value inside my effect?
+
+When I just started using Hooks, I was confused(困惑) by all of those questions too. Even(即使) when writing the initial(最初) docs, I didn’t have a firm(穩固) grasp(把握) on some of the subtleties(巧妙). I’ve since had a few “aha” moments that I want to share with you(從那以後，我想和你分享一些“啊哈”的時刻。). This deep dive( 深入研究) will make the answers to these questions look obvious(明顯) to you.
+
+To see the answers, we need to take a step back(退後一步). The goal(目的) of this article isn’t to give you a list of bullet point recipes(食譜清單). It’s to help you truly(真正) “grok”(理解) useEffect. There won’t be much to learn. In fact, we’ll spend most of our time unlearning(忘記).
+
+It’s only after I stopped looking at the useEffect Hook through the prism of the familiar class lifecycle methods that everything came together for me.(當你可以忘記 class 的 lifecycle 看法看 userEffect hook 的時候，任何野都會提供比你)
+
+---
+## “Unlearn what you have learned.” — Yoda (“忘記你所學的。”—尤達)
+![](./yoda.png)
+
+---
+
+This article assumes that you’re somewhat familiar with useEffect API.
+
+It’s also really long. It’s like a mini-book. That’s just my preferred format. But I wrote a TLDR just below if you’re in a rush or don’t really care.
+
+If you’re not comfortable with deep dives, you might want to wait until these explanations appear elsewhere. Just like when React came out in 2013, it will take some time for people to recognize a different mental model and teach it.
+
+---
+
+
 ---
 參考文章:
 
